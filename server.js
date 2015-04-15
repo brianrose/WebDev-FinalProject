@@ -1,6 +1,9 @@
 var express = require('express');
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost/test');
+
+var connectionString = process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost/test'
+
+mongoose.connect(connectionString);
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var app = express();
@@ -17,10 +20,6 @@ app.get('/api/team', function (req, res) {
     TeamModel.find(function (err, teams) {
         res.json(teams);
     });
-});
-
-app.get('/process', function (req, res) {
-    res.json(process.env);
 });
 
 app.use(bodyParser.json()); // for parsing application/json
