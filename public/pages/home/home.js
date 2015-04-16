@@ -22,6 +22,7 @@
             .success(function (response) {
                 console.log(response);
                 $rootScope.currentUser = response;
+                console.log($rootScope.currentUser);
             });
         }
     }

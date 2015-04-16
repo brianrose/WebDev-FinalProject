@@ -1,4 +1,4 @@
-﻿app.controller("RegisterController", function ($scope, $http) {
+﻿app.controller("RegisterController", function ($rootScope, $scope, $http) {
     $scope.register = function (user) {
         if (user.password == user.password2)
         {

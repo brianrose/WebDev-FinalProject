@@ -96,6 +96,17 @@ app.put('/api/addToFavoriteTeams/:userid/:teamid', function (req, res) {
     });
 });
 
+app.get('/api/favoriteTeams/:userid', function (req, res) {
+    console.log("Get favorite teams");
+    UserModel.findById(req.params.userid, function (err, user) {
+        if (user)
+        {
+            console.log(user);
+            res.json(user.favoriteTeams);
+        }
+    });
+});
+
 app.post("/login", passport.authenticate('local'), function (req, res) {
     res.json(req.user);
 });
