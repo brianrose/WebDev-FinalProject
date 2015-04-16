@@ -6,7 +6,7 @@
         <tbody>
             <tr ng-repeat="team in favoriteTeams">
                 <td>{{team.abbr}}</td>
-                <td>{{team.name + " " + team.nickname}}</td>
+                <td><a href="#/details/{{team._id}}">{{team.name + " " + team.nickname}}</a></td>
                 <td>
                     <button class="btn btn-danger pull-right" ng-click="removeFromFavoriteTeams(team)">
                         <span class="glyphicon glyphicon-minus"></span>

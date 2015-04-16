@@ -22,6 +22,10 @@ app.config(['$routeProvider',
             templateUrl: 'pages/register/register.html',
             controller: 'RegisterController'
         }).
+        when('/details/:teamid', {
+            templateUrl: 'pages/details/details.html',
+            controller: 'DetailsController'
+        }).
         otherwise({
             redirectTo: '/home'
         });
