@@ -105,6 +105,175 @@ app.post("/logout", function (req, res) {
     res.send(200);
 });
 
+
+
+app.get('/api/initDb', function (req, res) {
+    var teams = [
+         {
+             "abbr": "ARI",
+             "nickname": "Diamondbacks",
+             "name": "Arizona"
+         },
+         {
+             "abbr": "ATL",
+             "nickname": "Braves",
+             "name": "Atlanta"
+         },
+         {
+             "abbr": "BAL",
+             "nickname": "Orioles",
+             "name": "Baltimore"
+         },
+         {
+             "abbr": "BOS",
+             "nickname": "Red Sox",
+             "name": "Boston"
+         },
+         {
+             "abbr": "CHC",
+             "nickname": "Cubs",
+             "name": "Chicago"
+         },
+         {
+             "abbr": "CHW",
+             "nickname": "White Sox",
+             "name": "Chicago"
+         },
+         {
+             "abbr": "CIN",
+             "nickname": "Reds",
+             "name": "Cincinnati"
+         },
+         {
+             "abbr": "CLE",
+             "nickname": "Indians",
+             "name": "Cleveland"
+         },
+         {
+             "abbr": "COL",
+             "nickname": "Rockies",
+             "name": "Colorado"
+         },
+         {
+             "abbr": "DET",
+             "nickname": "Tigers",
+             "name": "Detroit"
+         },
+         {
+             "abbr": "HOU",
+             "nickname": "Astros",
+             "name": "Houston"
+         },
+         {
+             "abbr": "KC",
+             "nickname": "Royals",
+             "name": "Kansas City"
+         },
+         {
+             "abbr": "LAA",
+             "nickname": "Angels",
+             "name": "Los Angeles"
+         },
+         {
+             "abbr": "LAD",
+             "nickname": "Dodgers",
+             "name": "Los Angeles"
+         },
+         {
+             "abbr": "MIA",
+             "nickname": "Marlins",
+             "name": "Miami"
+         },
+         {
+             "abbr": "MIL",
+             "nickname": "Brewers",
+             "name": "Milwaukee"
+         },
+         {
+             "abbr": "MIN",
+             "nickname": "Twins",
+             "name": "Minnesota"
+         },
+         {
+             "abbr": "NYM",
+             "nickname": "Mets",
+             "name": "New York"
+         },
+         {
+             "abbr": "NYY",
+             "nickname": "Yankees",
+             "name": "New York"
+         },
+         {
+             "abbr": "OAK",
+             "nickname": "Athletics",
+             "name": "Oakland"
+         },
+         {
+             "abbr": "PHI",
+             "nickname": "Phillies",
+             "name": "Philadelphia"
+         },
+         {
+             "abbr": "PIT",
+             "nickname": "Pirates",
+             "name": "Pittsburgh"
+         },
+         {
+             "abbr": "SD",
+             "nickname": "Padres",
+             "name": "San Diego"
+         },
+         {
+             "abbr": "SF",
+             "nickname": "Giants",
+             "name": "San Francisco"
+         },
+         {
+             "abbr": "SEA",
+             "nickname": "Mariners",
+             "name": "Seattle"
+         },
+         {
+             "abbr": "STL",
+             "nickname": "Cardinals",
+             "name": "St. Louis"
+         },
+         {
+             "abbr": "TB",
+             "nickname": "Rays",
+             "name": "Tampa Bay"
+         },
+         {
+             "abbr": "TEX",
+             "nickname": "Rangers",
+             "name": "Texas"
+         },
+         {
+             "abbr": "TOR",
+             "nickname": "Blue Jays",
+             "name": "Toronto"
+         },
+         {
+             "abbr": "WAS",
+             "nickname": "Nationals",
+             "name": "Washington"
+         }
+    ];
+
+    TeamModel.remove(function (err) {
+        console.log("teams cleared");
+
+        for (var i = 0; i < teams.length; i++) {
+            var tm = new TeamModel(teams[i]);
+            tm.save();
+        }
+    });
+
+
+    res.send(200);
+})
+
 ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
