@@ -4,10 +4,11 @@ app.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
         when('/home', {
-            templateUrl: 'pages/home.html'
+            templateUrl: 'pages/home/home.html',
+            controller: 'HomeController'
         }).
         when('/profile', {
-            templateUrl: 'pages/profile.html',
+            templateUrl: 'pages/profile/profile.html',
             resolve: {
                 logincheck: checkLogin
             }

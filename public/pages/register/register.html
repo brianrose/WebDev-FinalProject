@@ -1,6 +1,6 @@
 ﻿<h1>Register</h1>
 
-<input ng-model="user.username" /><br />
-<input ng-model="user.password" /><br />
-<input ng-model="user.password2"/><br/>
-<button ng-click="register(user)">Register</button>
+<input class="form-control" ng-model="user.username" placeholder="Username" /><br />
+<input class="form-control" ng-model="user.password" placeholder="Password" /><br />
+<input class="form-control" ng-model="user.password2" placeholder="Confirm Password" /><br/>
+<button class="btn btn-primary" ng-click="register(user)">Register</button>

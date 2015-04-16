@@ -44,10 +44,10 @@ passport.use(new LocalStrategy(function (username, password, done) {
 }));
 
 var TeamSchema = new mongoose.Schema({
-    city: String,
+    abbr: String,
     nickname: String,
-    created: { type: Date, default: Date.now }
-}, { collection: 'team' });
+    name: String
+}, { collection: 'teams' });
 
 var TeamModel = mongoose.model('TeamModel', TeamSchema);
 
@@ -61,6 +61,13 @@ var UserModel = mongoose.model('UserModel', UserSchema);
 
 app.get('/api/team', function (req, res) {
     TeamModel.find(function (err, teams) {
+        res.json(teams);
+    });
+});
+
+app.get('/api/team/:name', function (req, res) {
+    var name = req.params.name;
+    TeamModel.find({ $or: [{ abbr: name }, { nickname: name }, { name: name }] }, function (err, teams) {
         res.json(teams);
     });
 });
