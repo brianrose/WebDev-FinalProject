@@ -1,0 +1,26 @@
+﻿<h1>Home</h1>
+
+<div class="col-lg-6">
+    <div class="input-group">
+        <input ng-model="searchTerm" type="text" class="form-control" placeholder="Search for teams...">
+        <span class="input-group-btn">
+            <button ng-click="search(searchTerm)" class="btn btn-default" type="button">Go!</button>
+        </span>
+    </div>
+</div>
+<div class="container" ng-show="teams">
+    <h2>Search Results</h2>
+    <table class="table table-striped">
+        <tbody>
+            <tr ng-repeat="team in teams">
+                <td>{{team.abbr}}</td>
+                <td>{{team.name + " " + team.nickname}}</td>
+                <td>
+                    <button class="btn btn-warning pull-right" ng-click="addToFavorites(team)">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
