@@ -16,10 +16,10 @@
                 <td>{{team.abbr}}</td>
                 <td>{{team.name + " " + team.nickname}}</td>
                 <td>
-                    <button ng-show="{{(currentUser.favoriteTeams.indexOf(team._id) == -1) || !currentUser}}" class="btn btn-warning pull-right" ng-click="addToFavoriteTeams(team)">
+                    <button ng-show="{{(favoriteTeams.indexOf(team._id) == -1) || !currentUser}}" class="btn btn-warning pull-right" ng-click="addToFavoriteTeams(team)">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
-                    <button ng-show="{{(currentUser.favoriteTeams.indexOf(team._id) != -1) && currentUser}}" class="btn btn-danger pull-right" ng-click="removeFromFavoriteTeams(team)">
+                    <button ng-show="{{(favoriteTeams.indexOf(team._id) != -1) && currentUser}}" class="btn btn-danger pull-right" ng-click="removeFromFavoriteTeams(team)">
                         <span class="glyphicon glyphicon-minus"></span>
                     </button>
                 </td>
