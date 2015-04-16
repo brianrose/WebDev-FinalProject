@@ -11,7 +11,8 @@ app.config(['$routeProvider',
             templateUrl: 'pages/profile/profile.html',
             resolve: {
                 logincheck: checkLogin
-            }
+            },
+            controller: 'ProfileController'
         }).
         when('/login', {
             templateUrl: 'pages/login/login.html',

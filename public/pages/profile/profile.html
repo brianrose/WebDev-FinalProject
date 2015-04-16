@@ -1,1 +1,18 @@
 ﻿<h1>Profile</h1>
+<h2>Hello, {{currentUser.username}}</h2>
+<div class="container" ng-show="favoriteTeams">
+    <h3>Favorite Teams</h3>
+    <table class="table table-striped">
+        <tbody>
+            <tr ng-repeat="team in favoriteTeams">
+                <td>{{team.abbr}}</td>
+                <td>{{team.name + " " + team.nickname}}</td>
+                <td>
+                    <button class="btn btn-warning pull-right" ng-click="addToFavoriteTeams(team)">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

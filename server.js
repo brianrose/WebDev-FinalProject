@@ -46,7 +46,8 @@ passport.use(new LocalStrategy(function (username, password, done) {
 var TeamSchema = new mongoose.Schema({
     abbr: String,
     nickname: String,
-    name: String
+    name: String,
+    fans: [{ type: mongoose.Schema.ObjectId, ref: 'UserModel' }]
 }, { collection: 'teams' });
 
 var TeamModel = mongoose.model('TeamModel', TeamSchema);
@@ -54,7 +55,7 @@ var TeamModel = mongoose.model('TeamModel', TeamSchema);
 var UserSchema = new mongoose.Schema({
     username: String,
     password: String,
-    email: String
+    favoriteTeams: [ {type: mongoose.Schema.ObjectId, ref : 'TeamModel'} ]
 });
 
 var UserModel = mongoose.model('UserModel', UserSchema);
@@ -65,10 +66,33 @@ app.get('/api/team', function (req, res) {
     });
 });
 
-app.get('/api/team/:name', function (req, res) {
+app.get('/api/team/name/:name', function (req, res) {
     var name = req.params.name;
     TeamModel.find({ $or: [{ abbr: name }, { nickname: name }, { name: name }] }, function (err, teams) {
         res.json(teams);
+    });
+});
+
+app.get('/api/team/id/:id', function (req, res) {
+    var id = req.params.id;
+    TeamModel.findById(id, function (err, team) {
+        res.json(team);
+    });
+});
+
+app.put('/api/addToFavoriteTeams/:userid/:teamid', function (req, res) {
+    var userid = req.params.userid;
+    var teamid = req.params.teamid;
+
+    UserModel.findById(userid, function (err, user) {
+        user.favoriteTeams.push(teamid);
+        user.save(function (err, user) {
+            res.json(user);
+        });
+    });
+    TeamModel.findById(teamid, function (err, team) {
+        team.fans.push(userid);
+        team.save();
     });
 });
 
@@ -86,6 +110,7 @@ app.post("/register", function (req, res) {
         else
         {
             var newUser = new UserModel(req.body);
+            newUser.favoriteTeams = [];
             newUser.save(function (err, user) {
                 req.login(user, function (err) {
                     if (err) { return next(err); }
@@ -104,8 +129,6 @@ app.post("/logout", function (req, res) {
     req.logout();
     res.send(200);
 });
-
-
 
 app.get('/api/initDb', function (req, res) {
     var teams = [
