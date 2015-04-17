@@ -39,6 +39,10 @@ app.config(['$routeProvider',
             },
             controller: 'ProfileController'
         }).
+        when('/profile/:userid', {
+            templateUrl: 'pages/profile/other/profile.html',
+            controller: 'OtherProfileController'
+        }).
         when('/login', {
             templateUrl: 'pages/login/login.html',
             controller: 'LoginController'

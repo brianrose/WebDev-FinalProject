@@ -1,11 +1,20 @@
-﻿app.controller('ProfileController', function ($scope, $rootScope, $http) {
+﻿app.controller('OtherProfileController', function ($routeParams, $scope, $rootScope, $http) {
 
-    $scope.user = $rootScope.currentUser;
-    
+    var userid = $routeParams.userid;
+
+    console.log($routeParams);
+    console.log(userid);
+
+    $http.get('/api/user/' + userid + '/' + 'username')
+    .success(function (response) {
+        console.log(response);
+        $scope.username = response;
+    });
+
     $scope.favoriteTeams = [];
     console.log("Get favorite teams");
-    console.log($scope.user._id);
-    $http.get('/api/favoriteTeams/' + $scope.user._id)
+    console.log(userid);
+    $http.get('/api/favoriteTeams/' + userid)
     .success(function (response) {
         console.log("Favorite teams");
         console.log(response);
@@ -19,12 +28,12 @@
 
     $scope.removeFromFavoriteTeams = function (team) {
         $http.delete('/api/favoriteTeams/' +
-            $scope.user._id + '/' +
+            userid + '/' +
             team._id)
         .success(function (response) {
             console.log(response);
             $scope.favoriteTeams = [];
-            $http.get('/api/favoriteTeams/' + $scope.user._id)
+            $http.get('/api/favoriteTeams/' + userid)
             .success(function (response) {
                 console.log("Favorite teams");
                 console.log(response);
@@ -40,10 +49,10 @@
 
     $scope.unFollow = function (user) {
         $http.delete('/api/follow/' +
-            $scope.user._id + '/' +
+            userid + '/' +
             user._id)
         .success(function (response) {
-            $http.get('/api/following/' + $scope.user._id)
+            $http.get('/api/following/' + userid)
             .success(function (response) {
                 console.log("following");
                 console.log(response);
@@ -52,12 +61,12 @@
         });
     }
 
-    $http.get('/api/following/' + $scope.user._id)
+    $http.get('/api/following/' + userid)
     .success(function (response) {
         $scope.following = response;
     });
 
-    $http.get('/api/followers/' + $scope.user._id)
+    $http.get('/api/followers/' + userid)
     .success(function (response) {
         $scope.followers = response;
     });

@@ -7,7 +7,7 @@
     <table class="table table-striped">
         <tbody>
             <tr ng-repeat="fan in fans">
-                <td>{{fan.username}}</td>
+                <td><a href="#/profile/{{fan._id}}">{{fan.username}}</a></td>
                 <td>
                     <button class="btn btn-primary pull-right" ng-click="follow(fan)">
                         <span class="glyphicon glyphicon-plus"></span>

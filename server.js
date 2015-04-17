@@ -184,6 +184,14 @@ app.get('/api/followers/:userid', function (req, res) {
     });
 });
 
+app.get('/api/user/:userid/username', function (req, res) {
+    var userid = req.params.userid;
+    console.log("Get username: " + userid);
+    UserModel.findById(userid, function (err, user) {
+        res.json(user.username);
+    });
+});
+
 app.post("/login", passport.authenticate('local'), function (req, res) {
     res.json(req.user);
 });
