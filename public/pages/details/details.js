@@ -3,15 +3,24 @@
     $http.get('/api/team/id/' + teamid)
     .success(function (response) {
         $scope.team = response;
+        $http.get('/api/twitter/searchTweets/' + $scope.team.nickname)
+        .success(function (response) {
+            console.log("tweets");
+            console.log(response);
+            $scope.tweets = response.statuses;
+        });
     });
 
     $scope.following = [];
 
-    $http.get('/api/user/' + $rootScope.currentUser._id + '/following')
-    .success(function (response) {
-        console.log(response);
-        $scope.following = response;
-    });
+    if ($rootScope.currentUser)
+    {
+        $http.get('/api/user/' + $rootScope.currentUser._id + '/following')
+        .success(function (response) {
+            console.log(response);
+            $scope.following = response;
+        });
+    }
 
     console.log($scope.following);
 

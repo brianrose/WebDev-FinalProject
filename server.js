@@ -15,6 +15,17 @@ var LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
+var twit = require('twitter');
+var twitter = new twit({
+    consumer_key: 'nE6UZgPnDtq54546mS7VnrFfx',
+    consumer_secret: 'q0uZSfPG0TmYnjSYMtSY3Rp4DPGGUJZ8eFG35QXRGyy8UwBTyY',
+    access_token_key: '307399031-LEe3LdvI60HMpSBKNz0ffx3O6AiXHhZbgRx2Drpm',
+    access_token_secret: 'I0X2SoKTTWfpeAZ9ijKVvjmXlkFyDLOaruihdy0Mz1kj5'
+    });
+
+var count = 0;
+var util = require['util'];
+
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(multer()); // for parsing multipart/form-data
@@ -61,6 +72,13 @@ var UserSchema = new mongoose.Schema({
 });
 
 var UserModel = mongoose.model('UserModel', UserSchema);
+
+app.get('/api/twitter/searchTweets/:query', function (req, res) {
+    twitter.get('search/tweets', { q: req.params.query }, function (error, tweets, response) {
+        if (error) throw error;
+        res.json(tweets);
+    });
+});
 
 app.get('/api/team', function (req, res) {
     TeamModel.find(function (err, teams) {
