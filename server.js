@@ -160,6 +160,14 @@ app.get('/api/following/:userid', function (req, res) {
     });
 });
 
+app.get('/api/followers/:userid', function (req, res) {
+    UserModel.findById(req.params.userid, function (err, user) {
+        UserModel.find({ _id: { $in: user.followers } }, function (err, users) {
+            res.json(users);
+        });
+    });
+});
+
 app.post("/login", passport.authenticate('local'), function (req, res) {
     res.json(req.user);
 });

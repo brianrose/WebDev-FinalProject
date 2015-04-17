@@ -41,4 +41,9 @@
     .success(function (response) {
         $scope.following = response;
     });
+
+    $http.get('/api/followers/' + $scope.user._id)
+    .success(function (response) {
+        $scope.followers = response;
+    });
 });

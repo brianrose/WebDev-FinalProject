@@ -32,3 +32,19 @@
         </tbody>
     </table>
 </div>
+<div class="container" ng-show="followers">
+    <h3>Followers</h3>
+    <table class="table table-striped">
+        <tbody>
+            <tr ng-repeat="user in followers">
+                <td>{{user.username}}</td>
+                <td>
+                    <button class="btn btn-danger pull-right" ng-click="follow(fan)">
+                        <span class="glyphicon glyphicon-minus"></span>
+                        <span class="glyphicon glyphicon-user"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
