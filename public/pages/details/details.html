@@ -9,8 +9,12 @@
             <tr ng-repeat="fan in fans">
                 <td><a href="#/profile/{{fan._id}}">{{fan.username}}</a></td>
                 <td>
-                    <button class="btn btn-primary pull-right" ng-click="follow(fan)">
+                    <button ng-show="{{(following.indexOf(fan._id) == -1) || !currentUser}}" class="btn btn-primary pull-right" ng-click="follow(fan)">
                         <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-user"></span>
+                    </button>
+                    <button ng-show="{{(following.indexOf(fan._id) != -1) && currentUser}}" class="btn btn-danger pull-right" ng-click="unFollow(user)">
+                        <span class="glyphicon glyphicon-minus"></span>
                         <span class="glyphicon glyphicon-user"></span>
                     </button>
                 </td>

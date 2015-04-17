@@ -5,11 +5,22 @@
         $scope.team = response;
     });
 
+    $scope.following = [];
+
+    $http.get('/api/user/' + $rootScope.currentUser._id + '/following')
+    .success(function (response) {
+        console.log(response);
+        $scope.following = response;
+    });
+
+    console.log($scope.following);
+
     $scope.showFans = function (team) {
         console.log("Show Fans");
         $http.get('/api/team/fans/' + team._id)
         .success(function (response) {
             console.log(response);
+            console.log($scope.following);
             $scope.fans = response;
         });
     }
