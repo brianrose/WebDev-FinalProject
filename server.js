@@ -152,6 +152,22 @@ app.post('/api/follow/:followerid/:followingid', function (req, res) {
     });
 });
 
+app.delete('/api/follow/:followerid/:followingid', function (req, res) {
+    var followerid = req.params.followerid;
+    var followingid = req.params.followingid;
+
+    UserModel.findById(followingid, function (err, following) {
+        following.followers.splice(following.followers.indexOf(followerid), 1);
+        following.save();
+    });
+    UserModel.findById(followerid, function (err, follower) {
+        follower.following.splice(follower.following.indexOf(followingid), 1);
+        follower.save(function (err, follower) {
+            res.json(follower);
+        });
+    });
+});
+
 app.get('/api/following/:userid', function (req, res) {
     UserModel.findById(req.params.userid, function (err, user) {
         UserModel.find({ _id: { $in: user.following } }, function (err, users) {

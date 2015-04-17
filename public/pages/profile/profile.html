@@ -23,7 +23,7 @@
             <tr ng-repeat="user in following">
                 <td>{{user.username}}</td>
                 <td>
-                    <button class="btn btn-danger pull-right" ng-click="follow(fan)">
+                    <button class="btn btn-danger pull-right" ng-click="unFollow(user)">
                         <span class="glyphicon glyphicon-minus"></span>
                         <span class="glyphicon glyphicon-user"></span>
                     </button>
@@ -38,12 +38,6 @@
         <tbody>
             <tr ng-repeat="user in followers">
                 <td>{{user.username}}</td>
-                <td>
-                    <button class="btn btn-danger pull-right" ng-click="follow(fan)">
-                        <span class="glyphicon glyphicon-minus"></span>
-                        <span class="glyphicon glyphicon-user"></span>
-                    </button>
-                </td>
             </tr>
         </tbody>
     </table>

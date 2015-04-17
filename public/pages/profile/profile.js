@@ -37,6 +37,20 @@
         });
     }
 
+    $scope.unFollow = function (user) {
+        $http.delete('/api/follow/' +
+            $scope.user._id + '/' +
+            user._id)
+        .success(function (response) {
+            $http.get('/api/following/' + $scope.user._id)
+            .success(function (response) {
+                console.log("following");
+                console.log(response);
+                $scope.following = response;
+            });
+        });
+    }
+
     $http.get('/api/following/' + $scope.user._id)
     .success(function (response) {
         $scope.following = response;
