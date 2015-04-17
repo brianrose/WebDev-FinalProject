@@ -107,6 +107,17 @@ app.get('/api/favoriteTeams/:userid', function (req, res) {
     });
 });
 
+app.get('/api/team/fans/:teamid', function (req, res) {
+    var fans = [];
+    TeamModel.findById(req.params.teamid, function (err, team) {
+        if (team) {
+            UserModel.find({ _id: { $in: team.fans } }, function (err, users) {
+                res.json(users);
+            });
+        }
+    });
+});
+
 app.post("/login", passport.authenticate('local'), function (req, res) {
     res.json(req.user);
 });

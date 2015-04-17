@@ -1,2 +1,14 @@
 ﻿<h1>Details</h1>
 <h2>{{team.name + " " + team.nickname}}</h2>
+<button ng-show="!fans" class="btn btn-primary" ng-click="showFans(team)">Show Fans</button>
+<button ng-show="fans" class="btn btn-primary" ng-click="hideFans()">Hide Fans</button>
+<div class="container" ng-show="fans">
+    <h3>Fans</h3>
+    <table class="table table-striped">
+        <tbody>
+            <tr ng-repeat="fan in fans">
+                <td>{{fan.username}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
