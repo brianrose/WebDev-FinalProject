@@ -1,6 +1,8 @@
 ﻿app.controller('HomeController', function ($location, $rootScope, $scope, $http) {
 
     $scope.search = function (searchTerm) {
+        console.log("search");
+        console.log($scope.favoriteTeams);
         $http.get('/api/team/name/' + searchTerm)
         .success(function (response) {
             console.log(response);
@@ -15,19 +17,19 @@
         .success(function (response) {
             console.log("Favorite teams");
             console.log(response);
-            for (var i = 0; i < response.length; i++) {
-                $http.get('/api/team/id/' + response[i])
-                .success(function (response) {
-                    $scope.favoriteTeams.push(response);
-                });
-            }
+            $scope.favoriteTeams = response;
+            //for (var i = 0; i < response.length; i++) {
+            //    $http.get('/api/team/id/' + response[i])
+            //    .success(function (response) {
+            //        $scope.favoriteTeams.push(response);
+            //    });
+            //}
         });
     }
 
     $scope.addToFavoriteTeams = function (team) {
         console.log("Add to favorite teams");
-        console.log($rootScope.currentUser);
-        console.log(team);
+        console.log($scope.favoriteTeams);
         if (!$rootScope.currentUser) {
             $location.url('/login');
         }
