@@ -9,7 +9,10 @@
             <tr ng-repeat="fan in fans">
                 <td>{{fan.username}}</td>
                 <td>
-                    
+                    <button class="btn btn-primary pull-right" ng-click="follow(fan)">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-user"></span>
+                    </button>
                 </td>
             </tr>
         </tbody>

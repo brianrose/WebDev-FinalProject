@@ -1,5 +1,5 @@
 ﻿<h1>Profile</h1>
-<h2>Hello, {{currentUser.username}}</h2>
+<h2>{{currentUser.username}}</h2>
 <div class="container" ng-show="favoriteTeams">
     <h3>Favorite Teams</h3>
     <table class="table table-striped">
@@ -10,6 +10,22 @@
                 <td>
                     <button class="btn btn-danger pull-right" ng-click="removeFromFavoriteTeams(team)">
                         <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container" ng-show="following">
+    <h3>Following</h3>
+    <table class="table table-striped">
+        <tbody>
+            <tr ng-repeat="user in following">
+                <td>{{user.username}}</td>
+                <td>
+                    <button class="btn btn-danger pull-right" ng-click="follow(fan)">
+                        <span class="glyphicon glyphicon-minus"></span>
+                        <span class="glyphicon glyphicon-user"></span>
                     </button>
                 </td>
             </tr>
