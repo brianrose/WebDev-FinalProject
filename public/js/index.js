@@ -1,5 +1,26 @@
 ﻿var app = angular.module("FinalApp", ["ngRoute"]);
 
+app.factory('FinalService', function FinalService($http) {
+    var followers = [];
+    var following = [];
+    var favoriteTeams = [];
+
+    var follow = function (followerid, followingid, callback) {
+        $http.put('/api/follow/' + followerid + '/' + followingid)
+        .success(callback);
+    }
+
+    var getFavoriteTeams = function (userid, callback) {
+        $http.get('/api/favoriteTeams/' + userid)
+        .success(callback);
+    }
+
+    return {
+        follow: follow,
+        getFavoriteTeams: getFavoriteTeams
+    };
+});
+
 app.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.

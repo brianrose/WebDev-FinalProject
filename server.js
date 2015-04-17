@@ -55,7 +55,9 @@ var TeamModel = mongoose.model('TeamModel', TeamSchema);
 var UserSchema = new mongoose.Schema({
     username: String,
     password: String,
-    favoriteTeams: [ {type: mongoose.Schema.ObjectId, ref : 'TeamModel'} ]
+    favoriteTeams: [{ type: mongoose.Schema.ObjectId, ref: 'TeamModel' }],
+    following: [{ type: mongoose.Schema.ObjectId, ref: 'UserModel' }],
+    followers: [{ type: mongoose.Schema.ObjectId, ref: 'UserModel' }]
 });
 
 var UserModel = mongoose.model('UserModel', UserSchema);
@@ -131,6 +133,22 @@ app.delete('/api/favoriteTeams/:userid/:teamid', function (req, res) {
     TeamModel.findById(teamid, function (err, team) {
         team.fans.splice(team.fans.indexOf(userid), 1);
         team.save();
+    });
+});
+
+app.post('/api/follow/:followerid/:followingid', function (req, res) {
+    var followerid = req.params.followerid;
+    var followingid = req.params.followingid;
+
+    UserModel.findById(followingid, function (err, following) {
+        following.followers.push(followerid);
+        following.save();
+    });
+    UserModel.findById(followerid, function (err, follower) {
+        follower.following.push(followingid);
+        follower.save(function (err, follower) {
+            res.json.follower;
+        });
     });
 })
 

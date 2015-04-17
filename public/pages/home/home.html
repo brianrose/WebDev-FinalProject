@@ -1,29 +1,33 @@
-﻿<h1>Home</h1>
+﻿<html ng-app="FinalApp">
+<body>
+    <h1>Home</h1>
 
-<div class="col-lg-6">
-    <div class="input-group">
-        <input ng-model="searchTerm" type="text" class="form-control" placeholder="Search for teams...">
-        <span class="input-group-btn">
-            <button ng-click="search(searchTerm)" class="btn btn-default" type="button">Go!</button>
-        </span>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input ng-model="searchTerm" type="text" class="form-control" placeholder="Search for teams...">
+            <span class="input-group-btn">
+                <button ng-click="search(searchTerm)" class="btn btn-default" type="button">Go!</button>
+            </span>
+        </div>
     </div>
-</div>
-<div class="container" ng-show="teams">
-    <h2>Search Results</h2>
-    <table class="table table-striped">
-        <tbody>
-            <tr ng-repeat="team in teams">
-                <td>{{team.abbr}}</td>
-                <td><a href="#/details/{{team._id}}">{{team.name + " " + team.nickname}}</a></td>
-                <td>
-                    <button ng-show="{{(favoriteTeams.indexOf(team._id) == -1) || !currentUser}}" class="btn btn-warning pull-right" ng-click="addToFavoriteTeams(team)">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                    <button ng-show="{{(favoriteTeams.indexOf(team._id) != -1) && currentUser}}" class="btn btn-danger pull-right" ng-click="removeFromFavoriteTeams(team)">
-                        <span class="glyphicon glyphicon-minus"></span>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="container" ng-show="teams">
+        <h2>Search Results</h2>
+        <table class="table table-striped">
+            <tbody>
+                <tr ng-repeat="team in teams">
+                    <td>{{team.abbr}}</td>
+                    <td><a href="#/details/{{team._id}}">{{team.name + " " + team.nickname}}</a></td>
+                    <td>
+                        <button ng-show="{{(favoriteTeams.indexOf(team._id) == -1) || !currentUser}}" class="btn btn-warning pull-right" ng-click="addToFavoriteTeams(team)">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                        <button ng-show="{{(favoriteTeams.indexOf(team._id) != -1) && currentUser}}" class="btn btn-danger pull-right" ng-click="removeFromFavoriteTeams(team)">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
