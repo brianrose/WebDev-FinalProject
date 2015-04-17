@@ -118,6 +118,22 @@ app.get('/api/team/fans/:teamid', function (req, res) {
     });
 });
 
+app.delete('/api/favoriteTeams/:userid/:teamid', function (req, res) {
+    var userid = req.params.userid;
+    var teamid = req.params.teamid;
+
+    UserModel.findById(userid, function (err, user) {
+        user.favoriteTeams.splice(user.favoriteTeams.indexOf(teamid), 1);
+        user.save(function (err, user) {
+            res.json(user);
+        });
+    });
+    TeamModel.findById(teamid, function (err, team) {
+        team.fans.splice(team.fans.indexOf(userid), 1);
+        team.save();
+    });
+})
+
 app.post("/login", passport.authenticate('local'), function (req, res) {
     res.json(req.user);
 });

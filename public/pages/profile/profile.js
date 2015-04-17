@@ -15,6 +15,23 @@
     });
 
     $scope.removeFromFavoriteTeams = function (team) {
-        //TODO: http.delete
+        $http.delete('/api/favoriteTeams/' +
+            $rootScope.currentUser._id + '/' +
+            team._id)
+        .success(function (response) {
+            console.log(response);
+            $scope.favoriteTeams = [];
+            $http.get('/api/favoriteTeams/' + $rootScope.currentUser._id)
+            .success(function (response) {
+                console.log("Favorite teams");
+                console.log(response);
+                for (var i = 0; i < response.length; i++) {
+                    $http.get('/api/team/id/' + response[i])
+                    .success(function (response) {
+                        $scope.favoriteTeams.push(response);
+                    });
+                }
+            });
+        });
     }
 });
