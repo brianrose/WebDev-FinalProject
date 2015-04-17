@@ -37,11 +37,33 @@
                 user._id)
             .success(function (response) {
                 $rootScope.currentUser = response;
+                $scope.following = response.following;
             });
         }
         else
         {
             $location.url('/login');
+        }
+    }
+
+    $scope.unFollow = function (user) {
+        $http.delete('/api/follow/' +
+            $rootScope.currentUser._id + '/' +
+            user._id)
+        .success(function (response) {
+            $scope.following = response.following;
+            console.log($scope.following);
+        });
+    }
+
+    $scope.isFollowing = function (userid) {
+        if ($scope.following.indexOf(userid) == -1) 
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 });

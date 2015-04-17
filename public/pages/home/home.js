@@ -18,12 +18,6 @@
             console.log("Favorite teams");
             console.log(response);
             $scope.favoriteTeams = response;
-            //for (var i = 0; i < response.length; i++) {
-            //    $http.get('/api/team/id/' + response[i])
-            //    .success(function (response) {
-            //        $scope.favoriteTeams.push(response);
-            //    });
-            //}
         });
     }
 
