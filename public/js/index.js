@@ -7,6 +7,10 @@ app.config(['$routeProvider',
             templateUrl: 'pages/home/home.html',
             controller: 'HomeController'
         }).
+        when('/search', {
+            templateUrl: 'pages/search/search.html',
+            controller: 'SearchController'
+        }).
         when('/profile', {
             templateUrl: 'pages/profile/profile.html',
             resolve: {

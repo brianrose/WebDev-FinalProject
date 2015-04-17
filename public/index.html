@@ -11,10 +11,12 @@
     <script src="pages/home/home.js"></script>
     <script src="pages/profile/profile.js"></script>
     <script src="pages/details/details.js"></script>
+    <script src="pages/search/search.js"></script>
 </head>
 <body ng-app="FinalApp">
     <nav ng-controller="NavController" class="container">
-        <a href="#/home">Home</a>
+        <a href="#/home">Home</a> |
+        <a href="#/search">Search</a>
         <span ng-show="!currentUser"> |
             <a href="#/login">Login</a> |
             <a href="#/register">Register</a>
