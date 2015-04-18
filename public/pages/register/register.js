@@ -1,4 +1,4 @@
-﻿app.controller("RegisterController", function ($rootScope, $scope, $http) {
+﻿app.controller("RegisterController", function ($location, $rootScope, $scope, $http) {
     $scope.register = function (user) {
         if (user.password == user.password2)
         {
@@ -6,6 +6,7 @@
             .success(function (user) {
                 $rootScope.currentUser = user;
                 console.log(user);
+                $location.url('/profile/' + user._id);
             });
         }
     }
